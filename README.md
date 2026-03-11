@@ -1,43 +1,22 @@
 # Ryan McKenzie Portfolio Website
 
-Static developer portfolio built with semantic HTML, modern CSS, and vanilla JavaScript. This repository is prepared for immediate GitHub Pages deployment.
+Static portfolio site built with semantic HTML, custom CSS, and vanilla JavaScript. The current version is tailored to Ryan McKenzie's resume and prepared for GitHub Pages deployment.
 
-## Files included
+## Files
 
-- `index.html` — page structure and content
-- `style.css` — dark-themed responsive styling
-- `script.js` — mobile navigation and footer year behavior
-- `.nojekyll` — disables Jekyll processing for static assets
-- `.github/workflows/deploy-pages.yml` — automatic GitHub Pages deployment workflow
-
-## Replace placeholders before deploying
-
-Update the following placeholders in `index.html`:
-
-- `YOUR_RESUME_LINK`
-- `YOUR_GITHUB`
-- `YOUR_LINKEDIN`
-- `YOUR_EMAIL`
-- `YOUR_PORTFOLIO_LINK`
-- Project card `#` links for each GitHub and Live Demo button
+- `index.html` - page structure and portfolio content
+- `style.css` - responsive layout, typography, and visual design
+- `script.js` - mobile navigation, reveal animations, and active section highlighting
+- `.nojekyll` - disables Jekyll processing for static assets
+- `.github/workflows/deploy-pages.yml` - automatic GitHub Pages deployment workflow
 
 ## Local preview
 
-Open `index.html` directly in your browser, or run a local static server if you prefer.
+Open `index.html` directly in a browser for a quick preview.
 
-## Enable GitHub Pages (if needed)
+## GitHub Pages
 
-1. Go to your repository on GitHub.
-2. Open **Settings → Pages**.
-3. Under **Build and deployment**, choose **GitHub Actions** as the source.
-4. Push to `main` to trigger deployment.
-
-## Deployment URL
-
-After the workflow runs, your site will be available at:
-
-- `https://<your-github-username>.github.io/<your-repo-name>/`
-
-If this is a user/organization site repository named `<your-github-username>.github.io`, the URL will be:
-
-- `https://<your-github-username>.github.io/`
+1. Open the repository on GitHub.
+2. Go to `Settings > Pages`.
+3. Under build and deployment, choose `GitHub Actions`.
+4. Push changes to the default branch to trigger deployment.

@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Ryan McKenzie portfolio website - Computer Science Senior, software developer, and creative technologist."
+      content="Ryan McKenzie portfolio website featuring software projects, technical skills, leadership experience, and student-athlete achievements."
     />
-    <title>Ryan McKenzie | Developer Portfolio</title>
+    <title>Ryan McKenzie | Software Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -17,11 +23,12 @@
       <div class="container nav-wrapper">
         <a class="brand" href="#top" aria-label="Ryan McKenzie home">Ryan McKenzie</a>
         <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">
-          ☰
+          Menu
         </button>
         <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
           <ul>
             <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#education">Education</a></li>
@@ -33,174 +40,355 @@
 
     <main id="main-content">
       <section class="hero section">
-        <div class="container hero-content">
-          <p class="eyebrow">Hello, I'm</p>
-          <h1>Ryan McKenzie</h1>
-          <p class="subtitle">Computer Science Senior at Bridgewater State University</p>
-          <p class="tagline">Software Developer | Audio Tech | Creative Technologist</p>
-          <div class="hero-actions" aria-label="Quick links">
-            <a class="btn btn-primary" href="#projects">Projects</a>
-            <!-- Replace YOUR_RESUME_LINK with your actual resume URL -->
-            <a class="btn btn-secondary" href="YOUR_RESUME_LINK" target="_blank" rel="noopener noreferrer">Resume</a>
-            <!-- Replace YOUR_GITHUB with your GitHub profile URL -->
-            <a class="btn btn-secondary" href="https://github.com/YOUR_GITHUB" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <!-- Replace YOUR_LINKEDIN with your LinkedIn profile URL -->
-            <a class="btn btn-secondary" href="https://linkedin.com/in/YOUR_LINKEDIN" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <div class="container hero-layout">
+          <div class="hero-copy" data-reveal>
+            <p class="eyebrow">Oxford, Massachusetts</p>
+            <h1>Computer science builder with range across software, audio, and leadership.</h1>
+            <p class="hero-summary">
+              I am Ryan McKenzie, a Bridgewater State University computer science student graduating in May 2026. I
+              build practical software, work comfortably across backend and application projects, and bring the
+              discipline of a student-athlete and team leader to the way I ship work.
+            </p>
+            <div class="hero-actions" aria-label="Quick links">
+              <a class="btn btn-primary" href="#projects">View Projects</a>
+              <a class="btn btn-secondary" href="mailto:r1mckenzie@student.bridgew.edu">Email Me</a>
+              <a
+                class="btn btn-secondary"
+                href="https://github.com/RyanMckenzie-code"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
+              <a
+                class="btn btn-secondary"
+                href="https://linkedin.com/in/ryan-mckenzie-a4599a329"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
+            </div>
+            <ul class="hero-contact">
+              <li><a href="tel:15082489785">508-248-9785</a></li>
+              <li><a href="mailto:r1mckenzie@student.bridgew.edu">r1mckenzie@student.bridgew.edu</a></li>
+              <li><span>Bridgewater State University, B.S. Computer Science</span></li>
+            </ul>
           </div>
+
+          <aside class="hero-panel" data-reveal>
+            <p class="panel-label">Snapshot</p>
+            <div class="snapshot-grid">
+              <article>
+                <span class="snapshot-value">May 2026</span>
+                <span class="snapshot-label">Expected graduation</span>
+              </article>
+              <article>
+                <span class="snapshot-value">3.5 GPA</span>
+                <span class="snapshot-label">Computer science major</span>
+              </article>
+              <article>
+                <span class="snapshot-value">3x Champion</span>
+                <span class="snapshot-label">Little East Conference winner</span>
+              </article>
+              <article>
+                <span class="snapshot-value">School Record</span>
+                <span class="snapshot-label">200-yard medley relay backstroke leg</span>
+              </article>
+            </div>
+            <div class="hero-note">
+              <p class="panel-label">What stands out</p>
+              <ul>
+                <li>Offline speech tooling, API clients, Android audio apps, and game systems.</li>
+                <li>Leadership experience managing safety-critical teams and daily operations.</li>
+                <li>Comfortable moving between technical depth, creative work, and public-facing execution.</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="signal-bar" aria-label="Career highlights">
+        <div class="container signal-grid">
+          <p>Python to Go across class and independent projects</p>
+          <p>Student-athlete with conference titles and leadership recognition</p>
+          <p>Software, audio, web, testing, APIs, and UI work in one portfolio</p>
         </div>
       </section>
 
       <section id="about" class="section">
-        <div class="container">
-          <h2>About</h2>
-          <p>
-            I am a Computer Science senior at Bridgewater State University, graduating in May 2026, focused on
-            software engineering, backend systems, Linux workflows, API integrations, audio technology, and creative
-            software development. I enjoy building practical tools that combine reliability with thoughtful user
-            experience.
-          </p>
-          <p>
-            Beyond technical development, I also build my own music brand and artist website, where I merge software,
-            sound, and digital storytelling into a cohesive creative identity.
-          </p>
+        <div class="container section-shell">
+          <div class="section-heading" data-reveal>
+            <p class="eyebrow">About</p>
+            <h2>A portfolio built around versatility and execution.</h2>
+          </div>
+          <div class="about-layout">
+            <div class="about-copy" data-reveal>
+              <p>
+                My work sits at the intersection of software engineering, creative technology, and disciplined team
+                performance. I enjoy building systems that are useful, reliable, and intuitive, whether that means a
+                speech-driven scheduler, a loop-based music app, a tested API client, or a responsive website for a
+                personal brand.
+              </p>
+              <p>
+                Outside the classroom, athletics and camp leadership have sharpened how I handle pressure, consistency,
+                and responsibility. That shows up in how I approach debugging, collaboration, and product quality.
+              </p>
+            </div>
+            <div class="about-points" data-reveal>
+              <article class="feature-card">
+                <h3>Technical range</h3>
+                <p>Python, Java, Kotlin, JavaScript, C++, and Go across web, mobile, backend, and gameplay projects.</p>
+              </article>
+              <article class="feature-card">
+                <h3>Creative systems mindset</h3>
+                <p>Audio tooling and artist web work give me a strong feel for interaction, timing, and presentation.</p>
+              </article>
+              <article class="feature-card">
+                <h3>Leadership under pressure</h3>
+                <p>Camp waterfront operations required supervision, safety enforcement, and emergency readiness.</p>
+              </article>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section id="projects" class="section alt-bg">
-        <div class="container">
-          <h2>Projects</h2>
-          <div class="cards-grid">
-            <article class="card">
+      <section id="skills" class="section section-tinted">
+        <div class="container section-shell">
+          <div class="section-heading" data-reveal>
+            <p class="eyebrow">Skills</p>
+            <h2>Strong fundamentals with room to build fast.</h2>
+          </div>
+          <div class="skills-grid">
+            <article class="skill-card" data-reveal>
+              <h3>Languages</h3>
+              <p>Python, Java, Kotlin, JavaScript, C++, Go</p>
+            </article>
+            <article class="skill-card" data-reveal>
+              <h3>Tools</h3>
+              <p>Git, GitHub, GitHub Actions, Linux, Bash, SQL, REST APIs, Android Studio</p>
+            </article>
+            <article class="skill-card" data-reveal>
+              <h3>Core concepts</h3>
+              <p>Object-oriented programming, data structures, algorithms, testing, Agile development</p>
+            </article>
+            <article class="skill-card" data-reveal>
+              <h3>Relevant coursework</h3>
+              <p>
+                Data Structures and Algorithms, Operating Systems, Software Engineering, Database Management Systems,
+                Discrete Mathematics, Calculus I-II
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section">
+        <div class="container section-shell">
+          <div class="section-heading" data-reveal>
+            <p class="eyebrow">Projects</p>
+            <h2>Selected work across voice, audio, games, APIs, and web.</h2>
+          </div>
+          <div class="projects-grid">
+            <article class="project-card project-card-featured" data-reveal>
+              <div class="project-topline">
+                <p class="project-kicker">Featured build</p>
+                <span class="project-stack">Python | Vosk | GitHub Actions</span>
+              </div>
               <h3>Voice-Driven Scheduling Application</h3>
-              <p class="tech">Python, Vosk, GitHub Actions</p>
               <p>
-                Offline voice-to-text scheduling assistant with microphone audio capture, transcription pipeline, and
-                automated testing/CI.
+                Built an offline speech-to-text scheduling tool using microphone capture, a Vosk transcription
+                pipeline, and file-based transcript storage for later scheduling analysis.
               </p>
-              <div class="card-actions">
-                <!-- Replace with project-specific GitHub and demo links -->
-                <a href="#" aria-label="Voice-Driven Scheduling Application GitHub link">GitHub</a>
-                <a href="#" aria-label="Voice-Driven Scheduling Application live demo">Live Demo</a>
-              </div>
+              <ul class="project-points">
+                <li>Focused on practical voice input without requiring a cloud service.</li>
+                <li>Added automated tests and CI workflows to validate core behavior and improve reliability.</li>
+              </ul>
             </article>
 
-            <article class="card">
+            <article class="project-card" data-reveal>
+              <div class="project-topline">
+                <p class="project-kicker">Mobile audio</p>
+                <span class="project-stack">Kotlin | Android</span>
+              </div>
               <h3>Loop-Based Music Mixer App</h3>
-              <p class="tech">Kotlin, Android, Audio</p>
               <p>
-                Incredibox-style loop mixing app with synchronized playback, layered audio, and real-time interaction.
+                Developed an Incredibox-style mobile app with synchronized loop playback, layered audio mixing, and
+                real-time interaction controls.
               </p>
-              <div class="card-actions">
-                <!-- Replace with project-specific GitHub and demo links -->
-                <a href="#" aria-label="Loop-Based Music Mixer App GitHub link">GitHub</a>
-                <a href="#" aria-label="Loop-Based Music Mixer App live demo">Live Demo</a>
-              </div>
+              <ul class="project-points">
+                <li>Prioritized timing accuracy and seamless loop transitions.</li>
+                <li>Designed for responsive interaction and smooth music creation.</li>
+              </ul>
             </article>
 
-            <article class="card">
+            <article class="project-card" data-reveal>
+              <div class="project-topline">
+                <p class="project-kicker">Gameplay systems</p>
+                <span class="project-stack">Go | Ebitengine</span>
+              </div>
+              <h3>2D Tower Defense Game</h3>
+              <p>
+                Created a 2D prototype with rendering, input handling, asset loading, and modular gameplay systems.
+              </p>
+              <ul class="project-points">
+                <li>Implemented core mechanics for player and enemy behavior.</li>
+                <li>Structured the project for future expansion into full tower defense features.</li>
+              </ul>
+            </article>
+
+            <article class="project-card" data-reveal>
+              <div class="project-topline">
+                <p class="project-kicker">API integration</p>
+                <span class="project-stack">Python | REST APIs</span>
+              </div>
               <h3>Room Booking API Client</h3>
-              <p class="tech">Python, REST APIs, Testing</p>
               <p>
-                Client for authentication, room retrieval, reservation flows, and validation tests.
+                Implemented authentication, room retrieval, and reservation flows against a room-reservation server
+                API.
               </p>
-              <div class="card-actions">
-                <!-- Replace with project-specific GitHub and demo links -->
-                <a href="#" aria-label="Room Booking API Client GitHub link">GitHub</a>
-                <a href="#" aria-label="Room Booking API Client live demo">Live Demo</a>
-              </div>
+              <ul class="project-points">
+                <li>Covered success and failure scenarios with tests.</li>
+                <li>Focused on accurate response handling and robust request flows.</li>
+              </ul>
             </article>
 
-            <article class="card">
+            <article class="project-card" data-reveal>
+              <div class="project-topline">
+                <p class="project-kicker">Personal brand</p>
+                <span class="project-stack">HTML | CSS | JavaScript</span>
+              </div>
               <h3>Personal Artist Website</h3>
-              <p class="tech">HTML, CSS, JavaScript</p>
               <p>
-                Personal brand website for music releases, live shows, media, and digital promotion.
+                Designed and maintained a responsive website for music releases, live performances, branding, and
+                digital promotion.
               </p>
-              <div class="card-actions">
-                <!-- Replace with project-specific GitHub and demo links -->
-                <a href="#" aria-label="Personal Artist Website GitHub link">GitHub</a>
-                <a href="#" aria-label="Personal Artist Website live demo">Live Demo</a>
+              <ul class="project-points">
+                <li>Balanced design, storytelling, and technical implementation.</li>
+                <li>Used the site as a platform for brand identity and audience communication.</li>
+              </ul>
+            </article>
+
+            <article class="project-card" data-reveal>
+              <div class="project-topline">
+                <p class="project-kicker">Team development</p>
+                <span class="project-stack">Python | SQL | TMDB API</span>
+              </div>
+              <h3>Movie Recommendation Web Application</h3>
+              <p>
+                Built backend features in a Scrum team using API data and SQL-backed user preferences to support movie
+                recommendations.
+              </p>
+              <ul class="project-points">
+                <li>Worked within a collaborative software engineering workflow.</li>
+                <li>Connected API inputs with persistence and recommendation features.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience" class="section section-tinted">
+        <div class="container section-shell">
+          <div class="section-heading" data-reveal>
+            <p class="eyebrow">Experience</p>
+            <h2>Leadership experience that translates directly to engineering work.</h2>
+          </div>
+          <div class="timeline">
+            <article class="timeline-item" data-reveal>
+              <div class="timeline-marker" aria-hidden="true"></div>
+              <div class="timeline-content">
+                <p class="timeline-date">Summer 2025</p>
+                <h3>Waterfront Director | Camp Foskett | Charlton, MA</h3>
+                <ul>
+                  <li>Supervised lifeguards and waterfront staff while managing daily programming.</li>
+                  <li>Enforced safety protocols and coordinated emergency response procedures.</li>
+                  <li>Led a team in an environment where consistency and quick judgment mattered every day.</li>
+                </ul>
               </div>
             </article>
 
-            <article class="card">
-              <h3>Movie Recommendation Web Application</h3>
-              <p class="tech">Python, SQL, TMDB API</p>
-              <p>
-                Team-built recommendation application using API data and stored user preferences.
-              </p>
-              <div class="card-actions">
-                <!-- Replace with project-specific GitHub and demo links -->
-                <a href="#" aria-label="Movie Recommendation Web Application GitHub link">GitHub</a>
-                <a href="#" aria-label="Movie Recommendation Web Application live demo">Live Demo</a>
+            <article class="timeline-item" data-reveal>
+              <div class="timeline-marker" aria-hidden="true"></div>
+              <div class="timeline-content">
+                <p class="timeline-date">Summers 2022-2024</p>
+                <h3>Lifeguard | Camp Foskett | Charlton, MA</h3>
+                <ul>
+                  <li>Monitored swimmer safety and supported camper supervision and instruction.</li>
+                  <li>Maintained readiness for aquatic incidents and followed established response procedures.</li>
+                  <li>Built a record of dependable team contribution before stepping into formal leadership.</li>
+                </ul>
               </div>
             </article>
           </div>
         </div>
       </section>
 
-      <section id="experience" class="section">
-        <div class="container">
-          <h2>Experience</h2>
+      <section id="education" class="section">
+        <div class="container section-shell">
+          <div class="section-heading" data-reveal>
+            <p class="eyebrow">Education</p>
+            <h2>Academic foundation, athletic discipline, and leadership recognition.</h2>
+          </div>
+          <div class="education-layout">
+            <article class="education-card" data-reveal>
+              <p class="card-label">Bridgewater State University</p>
+              <h3>B.S. in Computer Science</h3>
+              <p>Expected graduation: May 2026</p>
+              <p>GPA: 3.5 / 4.0</p>
+              <p>
+                Student-athlete in Men's Swimming and Diving, 3x Little East Conference champion, and member of the
+                200-yard medley relay school-record team on the backstroke leg.
+              </p>
+            </article>
 
-          <article class="timeline-item">
-            <h3>Waterfront Director, Camp Foskett, Charlton MA</h3>
-            <p class="meta">Summer 2025</p>
-            <ul>
-              <li>Led daily waterfront operations and supervised lifeguard staff for safe, efficient programming.</li>
-              <li>Designed and coordinated structured waterfront activities for diverse camper age groups.</li>
-              <li>Enforced safety standards, policies, and compliance procedures across all waterfront zones.</li>
-              <li>Managed emergency response readiness, drills, and incident coordination with leadership teams.</li>
-            </ul>
-          </article>
-
-          <article class="timeline-item">
-            <h3>Lifeguard, Camp Foskett, Charlton MA</h3>
-            <p class="meta">Summers 2022–2024</p>
-            <ul>
-              <li>Monitored swimmer safety and maintained active surveillance during all waterfront sessions.</li>
-              <li>Supervised campers in high-activity aquatic environments to prevent incidents.</li>
-              <li>Supported swim instruction and skill development alongside camp program staff.</li>
-              <li>Maintained emergency readiness through consistent training and response protocol adherence.</li>
-            </ul>
-          </article>
+            <article class="honors-card" data-reveal>
+              <p class="card-label">Honors and leadership</p>
+              <ul class="honors-list">
+                <li>Dean's List across multiple semesters</li>
+                <li>Academic All-District, NCAA Division III Men's Swimming and Diving</li>
+                <li>Bear Up Representative, Bridgewater State Athletics Leadership Program, 2023-2025</li>
+              </ul>
+            </article>
+          </div>
         </div>
       </section>
 
-      <section id="education" class="section alt-bg">
-        <div class="container">
-          <h2>Education</h2>
-          <article class="education-card">
-            <h3>Bridgewater State University</h3>
-            <p><strong>B.S. in Computer Science</strong></p>
-            <p>Expected Graduation: May 2026</p>
-            <p>GPA: 3.5/4.0</p>
-            <p>Men’s Swimming &amp; Diving</p>
-            <p>Competed in the Little East Conference Championships.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="contact" class="section">
-        <div class="container">
-          <h2>Contact</h2>
+      <section id="contact" class="section section-contact">
+        <div class="container contact-shell" data-reveal>
+          <div>
+            <p class="eyebrow">Contact</p>
+            <h2>Open to software opportunities, collaborative projects, and conversations.</h2>
+            <p>
+              If you are hiring for internships, early-career software roles, or want to connect around development,
+              music-tech, or product work, reach out directly.
+            </p>
+          </div>
           <ul class="contact-list">
-            <!-- Replace YOUR_EMAIL with your email address -->
-            <li>Email: <a href="mailto:YOUR_EMAIL">YOUR_EMAIL</a></li>
-            <!-- Replace YOUR_GITHUB with your GitHub username -->
-            <li>GitHub: <a href="https://github.com/YOUR_GITHUB" target="_blank" rel="noopener noreferrer">github.com/YOUR_GITHUB</a></li>
-            <!-- Replace YOUR_LINKEDIN with your LinkedIn handle -->
-            <li>LinkedIn: <a href="https://linkedin.com/in/YOUR_LINKEDIN" target="_blank" rel="noopener noreferrer">linkedin.com/in/YOUR_LINKEDIN</a></li>
-            <!-- Replace with your live portfolio URL if different -->
-            <li>Portfolio: <a href="https://YOUR_PORTFOLIO_LINK" target="_blank" rel="noopener noreferrer">YOUR_PORTFOLIO_LINK</a></li>
+            <li><span>Email</span><a href="mailto:r1mckenzie@student.bridgew.edu">r1mckenzie@student.bridgew.edu</a></li>
+            <li><span>Phone</span><a href="tel:15082489785">508-248-9785</a></li>
+            <li>
+              <span>GitHub</span>
+              <a href="https://github.com/RyanMckenzie-code" target="_blank" rel="noopener noreferrer">
+                github.com/RyanMckenzie-code
+              </a>
+            </li>
+            <li>
+              <span>LinkedIn</span>
+              <a href="https://linkedin.com/in/ryan-mckenzie-a4599a329" target="_blank" rel="noopener noreferrer">
+                linkedin.com/in/ryan-mckenzie-a4599a329
+              </a>
+            </li>
+            <li><span>Location</span><p>Oxford, MA</p></li>
           </ul>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <div class="container">
-        <p>&copy; <span id="year"></span> Ryan McKenzie. Built with HTML, CSS, and JavaScript.</p>
+      <div class="container footer-shell">
+        <p>&copy; <span id="year"></span> Ryan McKenzie</p>
+        <p>Built with HTML, CSS, and JavaScript.</p>
       </div>
     </footer>
 
