@@ -5,12 +5,15 @@ const sections = document.querySelectorAll('main section[id]');
 const revealItems = document.querySelectorAll('[data-reveal]');
 const yearElement = document.getElementById('year');
 const demoModal = document.getElementById('demo-modal');
+const demoModalFrame = demoModal ? demoModal.querySelector('.demo-modal-frame') : null;
 const demoExpandTriggers = document.querySelectorAll('[data-demo-expand]');
 const demoCloseTriggers = document.querySelectorAll('[data-demo-close]');
 const mediaToggles = document.querySelectorAll('[data-media-toggle]');
 const mediaSection = document.getElementById('swim-media');
 const pixelCloud = document.querySelector('.pixel-cloud');
 const sitePreviewCards = document.querySelectorAll('.site-preview-card');
+const demoRuntimes = document.querySelectorAll('[data-demo-runtime]');
+const extraDemoGroups = document.querySelectorAll('[data-extra-demos]');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 window.addEventListener('load', () => {
@@ -73,6 +76,78 @@ if (sitePreviewCards.length > 0) {
   });
 }
 
+const unloadDemoFrame = (frame, shell = null) => {
+  if (!frame) {
+    return;
+  }
+
+  if (frame.src) {
+    frame.src = 'about:blank';
+  }
+
+  if (shell) {
+    shell.classList.remove('is-active', 'is-loaded');
+  }
+};
+
+const unloadEmbeddedDemos = (activeShell = null) => {
+  demoRuntimes.forEach((shell) => {
+    if (shell === activeShell) {
+      return;
+    }
+
+    unloadDemoFrame(shell.querySelector('iframe[data-demo-src]'), shell);
+  });
+};
+
+const loadEmbeddedDemo = (shell) => {
+  const frame = shell.querySelector('iframe[data-demo-src]');
+
+  if (!frame || !frame.dataset.demoSrc) {
+    return;
+  }
+
+  unloadEmbeddedDemos(shell);
+  unloadDemoFrame(demoModalFrame);
+
+  if (frame.src !== frame.dataset.demoSrc) {
+    frame.addEventListener('load', () => {
+      shell.classList.add('is-loaded');
+    }, { once: true });
+    frame.src = frame.dataset.demoSrc;
+  } else {
+    shell.classList.add('is-loaded');
+  }
+
+  shell.classList.add('is-active');
+};
+
+if (demoRuntimes.length > 0) {
+  demoRuntimes.forEach((shell) => {
+    const launchTriggers = shell.querySelectorAll('[data-demo-launch]');
+
+    launchTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        loadEmbeddedDemo(shell);
+      });
+    });
+  });
+}
+
+if (extraDemoGroups.length > 0) {
+  extraDemoGroups.forEach((group) => {
+    group.addEventListener('toggle', () => {
+      if (group.open) {
+        return;
+      }
+
+      group.querySelectorAll('[data-demo-runtime]').forEach((shell) => {
+        unloadDemoFrame(shell.querySelector('iframe[data-demo-src]'), shell);
+      });
+    });
+  });
+}
+
 if (menuButton && nav) {
   menuButton.addEventListener('click', () => {
     const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
@@ -90,12 +165,19 @@ if (menuButton && nav) {
 
 if (demoModal) {
   const openDemoModal = () => {
+    unloadEmbeddedDemos();
+
+    if (demoModalFrame && demoModalFrame.dataset.demoSrc && demoModalFrame.src !== demoModalFrame.dataset.demoSrc) {
+      demoModalFrame.src = demoModalFrame.dataset.demoSrc;
+    }
+
     demoModal.classList.add('is-open');
     demoModal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
   };
 
   const closeDemoModal = () => {
+    unloadDemoFrame(demoModalFrame);
     demoModal.classList.remove('is-open');
     demoModal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('modal-open');

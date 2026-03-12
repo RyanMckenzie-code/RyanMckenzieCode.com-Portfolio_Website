@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Program Project 2 Demo</title>
+    <style>
+      :root {
+        --bg: #080204;
+        --panel: rgba(19, 8, 11, 0.88);
+        --panel-strong: #040203;
+        --text: #f5edf0;
+        --muted: #c8aeb7;
+        --accent: #ff566d;
+        --border: rgba(255, 118, 141, 0.16);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: clamp(0.5rem, 1vw, 1rem);
+        font-family: "Segoe UI", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top, rgba(255, 86, 109, 0.22), transparent 28%),
+          linear-gradient(180deg, #100206, var(--bg));
+      }
+
+      body.is-embed {
+        min-height: 0;
+        padding: 0;
+        background: transparent;
+      }
+
+      .shell {
+        width: min(100%, 1240px);
+        padding: clamp(0.6rem, 1vw, 0.9rem);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        background: var(--panel);
+        box-shadow: 0 24px 48px rgba(0, 0, 0, 0.28);
+      }
+
+      body.is-embed .shell {
+        width: 100%;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      .viewport {
+        overflow: hidden;
+        border-radius: 16px;
+        border: 1px solid var(--border);
+        background: var(--panel-strong);
+        aspect-ratio: 1 / 1;
+      }
+
+      body.is-embed .viewport {
+        border: 0;
+        border-radius: 0;
+      }
+
+      .meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: start;
+        margin-top: 0.9rem;
+      }
+
+      .meta h1 {
+        margin: 0;
+        font-size: 1.05rem;
+      }
+
+      .meta p {
+        margin: 0.3rem 0 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .status {
+        padding: 0.55rem 0.85rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--muted);
+        font-size: 0.9rem;
+        white-space: nowrap;
+      }
+
+      .viewport canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: #020202;
+      }
+
+      .controls {
+        margin: 1rem 0 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+      }
+
+      .controls li {
+        padding: 0.55rem 0.8rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .controls strong {
+        color: var(--accent);
+      }
+
+      body.is-embed .meta,
+      body.is-embed .controls {
+        display: none;
+      }
+
+      @media (max-width: 720px) {
+        body {
+          padding: 0;
+        }
+
+        .shell {
+          border-radius: 0;
+          border-left: 0;
+          border-right: 0;
+        }
+
+        .meta {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .status {
+          white-space: normal;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <div class="viewport" id="game-host"></div>
+
+      <div class="meta">
+        <div>
+          <h1>Program Project 2: Tuna Cat Prototype</h1>
+          <p>Click inside the canvas before using keyboard controls.</p>
+        </div>
+        <div class="status" id="status">Loading WebAssembly build...</div>
+      </div>
+
+      <ul class="controls">
+        <li><strong>Arrow Keys:</strong> move the cat through the map</li>
+        <li><strong>Goal:</strong> collect 9 closed tuna cans to open the portal</li>
+        <li><strong>Avoid:</strong> open tuna cans end the run on contact</li>
+        <li><strong>Explore:</strong> find the second map after the portal opens</li>
+      </ul>
+    </div>
+
+    <script src="wasm_exec.js"></script>
+    <script>
+      const isEmbed = new URLSearchParams(window.location.search).get("embed") === "1";
+      const gameHost = document.getElementById("game-host");
+      const statusElement = document.getElementById("status");
+      const go = new Go();
+
+      if (isEmbed) {
+        document.body.classList.add("is-embed");
+      }
+
+      const attachGameCanvas = () => {
+        if (!gameHost) {
+          return false;
+        }
+
+        const gameCanvas = Array.from(document.body.querySelectorAll("canvas")).find(
+          (canvas) => canvas.parentElement === document.body
+        );
+
+        if (!gameCanvas) {
+          return false;
+        }
+
+        gameHost.appendChild(gameCanvas);
+        return true;
+      };
+
+      const canvasObserver = new MutationObserver(() => {
+        if (attachGameCanvas()) {
+          canvasObserver.disconnect();
+        }
+      });
+
+      canvasObserver.observe(document.body, { childList: true });
+      attachGameCanvas();
+
+      if (!WebAssembly.instantiateStreaming) {
+        WebAssembly.instantiateStreaming = async (response, importObject) => {
+          const source = await (await response).arrayBuffer();
+          return WebAssembly.instantiate(source, importObject);
+        };
+      }
+
+      const setStatus = (message) => {
+        if (statusElement) {
+          statusElement.textContent = message;
+        }
+      };
+
+      go.importObject.env = {
+        ...(go.importObject.env || {}),
+        EBITENGINE_SCREENSHOT_KEY: "",
+        EBITENGINE_INTERNAL_IMAGES_KEY: "",
+      };
+
+      setStatus("Starting game...");
+
+      WebAssembly.instantiateStreaming(fetch("programproject2.wasm"), go.importObject)
+        .then((result) => {
+          setStatus("Running");
+          return go.run(result.instance);
+        })
+        .catch((error) => {
+          console.error(error);
+          setStatus("Failed to load demo");
+        });
+    </script>
+  </body>
+</html>

@@ -554,15 +554,95 @@
                   </a>
                 </div>
               </div>
-              <div class="demo-frame-shell">
+              <div class="demo-frame-shell" data-demo-runtime="tower-defense">
+                <div class="demo-runtime-placeholder">
+                  <p class="eyebrow">Performance Mode</p>
+                  <h4>Load the tower defense demo only when you want to play it.</h4>
+                  <p>Only one live demo runs at a time on the page, so the active game gets the full browser budget.</p>
+                  <div class="demo-runtime-actions">
+                    <button class="btn btn-primary" type="button" data-demo-launch>Play in portfolio</button>
+                  </div>
+                </div>
                 <iframe
                   class="demo-frame"
-                  src="FinalGameDemo/index.html?embed=1"
+                  data-demo-src="FinalGameDemo/index.html?embed=1"
                   title="Playable FinalGame tower defense demo"
                   loading="lazy"
                   allow="autoplay"
                 ></iframe>
               </div>
+              <details class="more-demos" data-extra-demos>
+                <summary>See more demos I made in 2D Game Design</summary>
+                <div class="more-demos-grid">
+                  <article class="mini-demo-card">
+                    <div class="mini-demo-copy">
+                      <p class="eyebrow">Program Project 1</p>
+                      <h4>Asteroid Dodge</h4>
+                      <p>
+                        Pilot a spaceship, dodge incoming asteroids, and clear paths with timed shots in this arcade
+                        prototype.
+                      </p>
+                      <div class="mini-demo-actions">
+                        <a
+                          class="btn btn-secondary"
+                          href="programProject1Demo/index.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Open in new tab
+                        </a>
+                      </div>
+                    </div>
+                    <div class="mini-demo-shell mini-demo-shell-wide" data-demo-runtime="asteroid-dodge">
+                      <div class="mini-demo-placeholder">
+                        <p>Load this demo when you want to play it. Other embedded demos will pause.</p>
+                        <button class="btn btn-primary" type="button" data-demo-launch>Play this demo</button>
+                      </div>
+                      <iframe
+                        class="mini-demo-frame"
+                        data-demo-src="programProject1Demo/index.html?embed=1"
+                        title="Playable asteroid dodge demo"
+                        loading="lazy"
+                        allow="autoplay"
+                      ></iframe>
+                    </div>
+                  </article>
+
+                  <article class="mini-demo-card">
+                    <div class="mini-demo-copy">
+                      <p class="eyebrow">Program Project 2</p>
+                      <h4>Tuna Cat</h4>
+                      <p>
+                        Explore the map as a cat, collect the right cans, avoid the bad pickups, and unlock the portal
+                        to the second stage.
+                      </p>
+                      <div class="mini-demo-actions">
+                        <a
+                          class="btn btn-secondary"
+                          href="programProject2Demo/index.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Open in new tab
+                        </a>
+                      </div>
+                    </div>
+                    <div class="mini-demo-shell mini-demo-shell-square" data-demo-runtime="tuna-cat">
+                      <div class="mini-demo-placeholder">
+                        <p>Load this demo when you want to play it. Other embedded demos will pause.</p>
+                        <button class="btn btn-primary" type="button" data-demo-launch>Play this demo</button>
+                      </div>
+                      <iframe
+                        class="mini-demo-frame"
+                        data-demo-src="programProject2Demo/index.html?embed=1"
+                        title="Playable tuna cat demo"
+                        loading="lazy"
+                        allow="autoplay"
+                      ></iframe>
+                    </div>
+                  </article>
+                </div>
+              </details>
               </section>
             </div>
           </section>
@@ -581,7 +661,7 @@
             </div>
             <iframe
               class="demo-modal-frame"
-              src="FinalGameDemo/index.html?embed=1"
+              data-demo-src="FinalGameDemo/index.html?embed=1"
               title="Expanded playable FinalGame tower defense demo"
               loading="lazy"
               allow="autoplay"
