@@ -14,6 +14,18 @@ Static portfolio site built with semantic HTML, custom CSS, and vanilla JavaScri
 
 Open `index.html` directly in a browser for a quick preview.
 
+## FinalGame demo
+
+The source game can stay in its own separate `FinalGame` repository. The portfolio repo only tracks the browser-ready files in `FinalGameDemo/`.
+
+To rebuild and sync the demo after changing the Go code:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\sync-finalgame-demo.ps1
+```
+
+The WebAssembly demo should be opened through a local or hosted HTTP server rather than `file://`.
+
 ## GitHub Pages
 
 1. Open the repository on GitHub.

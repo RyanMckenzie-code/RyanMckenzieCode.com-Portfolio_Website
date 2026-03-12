@@ -18,6 +18,14 @@
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div class="background-scene" aria-hidden="true">
+      <div class="beam beam-one"></div>
+      <div class="beam beam-two"></div>
+      <div class="beam beam-three"></div>
+      <div class="grid-horizon"></div>
+      <div class="pixel-cloud"></div>
+      <div class="scanlines"></div>
+    </div>
 
     <header class="site-header" id="top">
       <div class="container nav-wrapper">
@@ -42,7 +50,7 @@
       <section class="hero section">
         <div class="container hero-layout">
           <div class="hero-copy" data-reveal>
-            <p class="eyebrow">Oxford, Massachusetts</p>
+            <p class="eyebrow">Charlton, Massachusetts</p>
             <h1>Computer science builder with range across software, audio, and leadership.</h1>
             <p class="hero-summary">
               I am Ryan McKenzie, a Bridgewater State University computer science student graduating in May 2026. I
@@ -90,10 +98,32 @@
               <article>
                 <span class="snapshot-value">3x Champion</span>
                 <span class="snapshot-label">Little East Conference winner</span>
+                <button
+                  class="inline-link inline-button snapshot-action"
+                  type="button"
+                  data-media-toggle
+                  data-label-open="See more"
+                  data-label-close="Hide details"
+                  aria-expanded="false"
+                  aria-controls="swim-media"
+                >
+                  See more
+                </button>
               </article>
               <article>
                 <span class="snapshot-value">School Record</span>
                 <span class="snapshot-label">200-yard medley relay backstroke leg</span>
+                <button
+                  class="inline-link inline-button snapshot-action"
+                  type="button"
+                  data-media-toggle
+                  data-label-open="See more"
+                  data-label-close="Hide details"
+                  aria-expanded="false"
+                  aria-controls="swim-media"
+                >
+                  See more
+                </button>
               </article>
             </div>
             <div class="hero-note">
@@ -235,6 +265,18 @@
                 <li>Implemented core mechanics for player and enemy behavior.</li>
                 <li>Structured the project for future expansion into full tower defense features.</li>
               </ul>
+                <div class="project-actions">
+                  <a class="inline-link" href="#tower-defense-demo">Play demo on this page</a>
+                  <button class="inline-link inline-button" type="button" data-demo-expand>Open expanded demo</button>
+                  <a
+                    class="inline-link"
+                    href="FinalGameDemo/index.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open standalone demo
+                </a>
+              </div>
             </article>
 
             <article class="project-card" data-reveal>
@@ -267,6 +309,35 @@
                 <li>Balanced design, storytelling, and technical implementation.</li>
                 <li>Used the site as a platform for brand identity and audience communication.</li>
               </ul>
+              <div class="project-actions">
+                <a
+                  class="inline-link"
+                  href="https://ryanmckenziemusic.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Visit ryanmckenziemusic.com
+                </a>
+              </div>
+              <div class="site-preview-card">
+                <div class="site-preview-header">
+                  <span class="site-preview-dot"></span>
+                  <span class="site-preview-url">ryanmckenziemusic.com</span>
+                  <span class="site-preview-tag">Hover preview</span>
+                </div>
+                <div class="site-preview-shell">
+                  <iframe
+                    class="site-preview-frame"
+                    src="https://ryanmckenziemusic.com"
+                    title="Preview of Ryan McKenzie Music website"
+                    loading="lazy"
+                  ></iframe>
+                </div>
+                <p class="site-preview-note">
+                  Hover or focus this card for a live preview. If your browser blocks the external frame, use the link
+                  above.
+                </p>
+              </div>
             </article>
 
             <article class="project-card" data-reveal>
@@ -285,11 +356,59 @@
               </ul>
             </article>
           </div>
-        </div>
-      </section>
 
-      <section id="experience" class="section section-tinted">
-        <div class="container section-shell">
+            <section class="demo-section" id="tower-defense-demo" data-reveal>
+              <div class="demo-copy">
+                <p class="eyebrow">Playable Demo</p>
+                <h3>Play the tower defense prototype directly in the portfolio.</h3>
+                <p>
+                  This browser build is compiled from the Go codebase with WebAssembly, so visitors can interact with a
+                  real version of the project instead of just reading a summary.
+                </p>
+                <div class="demo-actions">
+                  <button class="btn btn-primary" type="button" data-demo-expand>Launch expanded view</button>
+                  <a class="btn btn-secondary" href="FinalGameDemo/index.html" target="_blank" rel="noopener noreferrer">
+                    Open in new tab
+                  </a>
+                </div>
+              </div>
+              <div class="demo-frame-shell">
+                <iframe
+                  class="demo-frame"
+                  src="FinalGameDemo/index.html?embed=1"
+                  title="Playable FinalGame tower defense demo"
+                  loading="lazy"
+                  allow="autoplay"
+                ></iframe>
+              </div>
+              </section>
+            </div>
+          </section>
+
+        <div class="demo-modal" id="demo-modal" aria-hidden="true">
+          <div class="demo-modal-backdrop" data-demo-close></div>
+          <div class="demo-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title">
+            <div class="demo-modal-topbar">
+              <div>
+                <p class="eyebrow">Expanded Demo</p>
+                <h3 id="demo-modal-title">FinalGame: Tower Defense</h3>
+              </div>
+              <button class="demo-modal-close" type="button" aria-label="Close expanded demo" data-demo-close>
+                Close
+              </button>
+            </div>
+            <iframe
+              class="demo-modal-frame"
+              src="FinalGameDemo/index.html?embed=1"
+              title="Expanded playable FinalGame tower defense demo"
+              loading="lazy"
+              allow="autoplay"
+            ></iframe>
+          </div>
+        </div>
+
+        <section id="experience" class="section section-tinted">
+          <div class="container section-shell">
           <div class="section-heading" data-reveal>
             <p class="eyebrow">Experience</p>
             <h2>Leadership experience that translates directly to engineering work.</h2>
@@ -340,6 +459,17 @@
                 Student-athlete in Men's Swimming and Diving, 3x Little East Conference champion, and member of the
                 200-yard medley relay school-record team on the backstroke leg.
               </p>
+              <button
+                class="inline-link inline-button media-trigger"
+                type="button"
+                data-media-toggle
+                data-label-open="See more about my swimming journey"
+                data-label-close="Hide more about my swimming journey"
+                aria-expanded="false"
+                aria-controls="swim-media"
+              >
+                See more about my swimming journey
+              </button>
             </article>
 
             <article class="honors-card" data-reveal>
@@ -351,7 +481,107 @@
               </ul>
             </article>
           </div>
-        </div>
+
+          <section class="media-section" id="swim-media" data-reveal hidden>
+              <div class="media-section-header">
+                <div>
+                  <p class="eyebrow">Athletics Media</p>
+                  <h3>School-record relay and team achievement highlights.</h3>
+                </div>
+                <p class="media-section-note">
+                  This gallery is structured for future additions, so more race clips, team moments, and honors can
+                  slot in here without changing the layout.
+                </p>
+              </div>
+
+              <div class="media-grid" id="swim-media-grid">
+                <article class="media-story-strip">
+                  <p class="card-label">Championship arc</p>
+                  <p>
+                    2023 was the first conference title as a freshman entering a winning culture. 2024 proved the team
+                    could come back and do it again. 2025 was the year the group fell short, grew, and returned
+                    sharper. In 2026, the championship came back to Bridgewater, and the senior-year finish included a
+                    school record shared with close teammates.
+                  </p>
+                </article>
+
+                <article class="media-card">
+                  <div class="media-card-copy">
+                    <p class="card-label">Featured clip</p>
+                    <h4>200-yard medley relay school record</h4>
+                  <p>
+                    Bridgewater State relay performance with the record-setting team and your backstroke leg in the
+                    race.
+                  </p>
+                  <a
+                    class="inline-link"
+                    href="Media/200yrdMedleyRelayRecord.mov"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Open video in a new tab
+                  </a>
+                </div>
+                <div class="media-card-player">
+                  <video controls preload="metadata" playsinline>
+                    <source src="Media/200yrdMedleyRelayRecord.mov" type="video/quicktime" />
+                    Your browser could not play this video inline. Use the link above to open it directly.
+                  </video>
+                </div>
+              </article>
+
+                <div class="media-gallery-grid">
+                  <article class="media-gallery-card">
+                    <img
+                      src="Media/CHAMPS2026.jpg"
+                      alt="Bridgewater State team photo after the 2023 conference championship"
+                      loading="lazy"
+                    />
+                    <div class="media-gallery-copy">
+                      <p class="card-label">2023 | Freshman year</p>
+                      <h4>First championship</h4>
+                      <p>
+                        New to the team and excited to win that first conference championship as part of a strong
+                        Bridgewater group.
+                      </p>
+                    </div>
+                  </article>
+
+                  <article class="media-gallery-card">
+                    <img
+                      src="Media/CHAMPS2024.jpg"
+                      alt="Bridgewater State team photo after the 2024 conference championship"
+                      loading="lazy"
+                    />
+                    <div class="media-gallery-copy">
+                      <p class="card-label">2024 | Sophomore year</p>
+                      <h4>Back-to-back champions</h4>
+                      <p>
+                        The team returned the next year and won again, turning the first title into a repeat standard.
+                      </p>
+                    </div>
+                  </article>
+
+                  <article class="media-gallery-card">
+                    <img
+                      src="Media/CHAMPS2023.jpg"
+                      alt="Bridgewater State team photo after the 2026 conference championship with Ryan front and center holding the trophy"
+                      loading="lazy"
+                    />
+                    <div class="media-gallery-copy">
+                      <p class="card-label">2026 | Senior year</p>
+                      <h4>Bringing the title back</h4>
+                      <p>
+                        After the 2025 setback, the team came back hungry and brought the championship back to
+                        Bridgewater. Front and center with the trophy, this was the close of a swim career with a
+                        school record and college best friends.
+                      </p>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </section>
+          </div>
       </section>
 
       <section id="contact" class="section section-contact">
@@ -379,7 +609,7 @@
                 linkedin.com/in/ryan-mckenzie-a4599a329
               </a>
             </li>
-            <li><span>Location</span><p>Oxford, MA</p></li>
+            <li><span>Location</span><p>Charlton, MA</p></li>
           </ul>
         </div>
       </section>
