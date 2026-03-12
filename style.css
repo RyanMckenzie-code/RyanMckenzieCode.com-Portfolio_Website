@@ -641,9 +641,41 @@ li {
 }
 
 .site-preview-shell {
+  position: relative;
   aspect-ratio: 16 / 10;
   background: #080506;
   overflow: hidden;
+}
+
+.site-preview-placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  gap: 0.85rem;
+  align-content: center;
+  text-align: center;
+  background:
+    radial-gradient(circle at center, rgba(255, 52, 83, 0.12), transparent 32%),
+    linear-gradient(180deg, rgba(9, 5, 6, 0.98), rgba(16, 8, 11, 0.98));
+  color: var(--muted);
+  transition: opacity 0.28s ease;
+}
+
+.site-preview-loader {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 84, 113, 0.18);
+  border-top-color: var(--accent);
+  animation: sitePreviewSpin 0.9s linear infinite;
+}
+
+.site-preview-placeholder p {
+  margin: 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .site-preview-frame {
@@ -651,10 +683,20 @@ li {
   width: 125%;
   height: 125%;
   border: 0;
+  opacity: 0;
   transform: scale(0.8);
   transform-origin: top left;
   filter: saturate(0.96) contrast(1.02);
-  transition: transform 0.26s ease;
+  transition: transform 0.26s ease, opacity 0.28s ease;
+}
+
+.site-preview-card.is-loaded .site-preview-frame {
+  opacity: 1;
+}
+
+.site-preview-card.is-loaded .site-preview-placeholder {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .site-preview-card:hover .site-preview-frame,
@@ -1067,6 +1109,12 @@ body.modal-open {
   50% {
     opacity: 0.95;
     transform: scale(1.1);
+  }
+}
+
+@keyframes sitePreviewSpin {
+  to {
+    transform: rotate(360deg);
   }
 }
 

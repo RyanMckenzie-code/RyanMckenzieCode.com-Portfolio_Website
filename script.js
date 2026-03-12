@@ -10,7 +10,12 @@ const demoCloseTriggers = document.querySelectorAll('[data-demo-close]');
 const mediaToggles = document.querySelectorAll('[data-media-toggle]');
 const mediaSection = document.getElementById('swim-media');
 const pixelCloud = document.querySelector('.pixel-cloud');
+const sitePreviewCards = document.querySelectorAll('.site-preview-card');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+window.addEventListener('load', () => {
+  document.documentElement.classList.remove('is-loading');
+});
 
 if (yearElement) {
   yearElement.textContent = new Date().getFullYear();
@@ -28,6 +33,44 @@ if (pixelCloud) {
     pixel.style.setProperty('--delay', `${Math.random() * -5}s`);
     pixelCloud.appendChild(pixel);
   }
+}
+
+if (sitePreviewCards.length > 0) {
+  sitePreviewCards.forEach((card) => {
+    const frame = card.querySelector('.site-preview-frame');
+    const placeholderLabel = card.querySelector('.site-preview-placeholder p');
+    let hasStartedLoading = false;
+
+    if (!frame) {
+      return;
+    }
+
+    const startPreviewLoad = () => {
+      if (hasStartedLoading) {
+        return;
+      }
+
+      hasStartedLoading = true;
+
+      if (placeholderLabel) {
+        placeholderLabel.textContent = 'Loading live preview...';
+      }
+
+      if (frame.dataset.src) {
+        frame.src = frame.dataset.src;
+      }
+    };
+
+    frame.addEventListener('load', () => {
+      window.setTimeout(() => {
+        card.classList.add('is-loaded');
+      }, 250);
+    });
+
+    card.addEventListener('mouseenter', startPreviewLoad, { once: true });
+    card.addEventListener('focusin', startPreviewLoad, { once: true });
+    card.addEventListener('touchstart', startPreviewLoad, { once: true });
+  });
 }
 
 if (menuButton && nav) {
