@@ -397,14 +397,27 @@
             <p class="eyebrow">Projects</p>
             <h2>Selected work across voice, audio, games, APIs, and web.</h2>
           </div>
+          <div class="project-controls" data-reveal>
+            <div class="project-filter-group" aria-label="Project categories">
+              <button class="project-filter is-active" type="button" data-project-filter="all">All</button>
+              <button class="project-filter" type="button" data-project-filter="games">Games</button>
+              <button class="project-filter" type="button" data-project-filter="backend">Backend</button>
+              <button class="project-filter" type="button" data-project-filter="web">Web</button>
+              <button class="project-filter" type="button" data-project-filter="mobile">Mobile</button>
+              <button class="project-filter" type="button" data-project-filter="ai-audio">AI / Audio</button>
+            </div>
+            <button class="project-mode-toggle" type="button" data-systems-toggle aria-pressed="false">
+              Systems View
+            </button>
+          </div>
           <div class="projects-grid">
-            <article class="project-card project-card-featured" data-reveal>
+            <article class="project-card project-card-featured" data-project-category="ai-audio" data-reveal>
               <div class="project-topline">
                 <p class="project-kicker">Featured build</p>
                 <span class="project-stack">Python | Vosk | GitHub Actions</span>
               </div>
               <h3>Voice-Driven Scheduling Application</h3>
-              <p>
+              <p class="project-summary">
                 Built an offline speech-to-text scheduling tool using microphone capture, a Vosk transcription
                 pipeline, and file-based transcript storage for later scheduling analysis.
               </p>
@@ -412,15 +425,22 @@
                 <li>Focused on practical voice input without requiring a cloud service.</li>
                 <li>Added automated tests and CI workflows to validate core behavior and improve reliability.</li>
               </ul>
+              <div class="project-system-panel">
+                <div><span>Stack</span><p>Python, Vosk, GitHub Actions</p></div>
+                <div><span>Role</span><p>Solo developer</p></div>
+                <div><span>Architecture</span><p>Microphone capture, offline transcription pipeline, transcript storage, CI validation.</p></div>
+                <div><span>Hardest problem</span><p>Keeping the speech workflow practical and local without leaning on cloud APIs.</p></div>
+                <div><span>Outcome</span><p>Produced a reliable offline scheduling prototype backed by tests and automated checks.</p></div>
+              </div>
             </article>
 
-            <article class="project-card" data-reveal>
+            <article class="project-card" data-project-category="mobile" data-reveal>
               <div class="project-topline">
                 <p class="project-kicker">Mobile audio</p>
                 <span class="project-stack">Kotlin | Android</span>
               </div>
               <h3>Loop-Based Music Mixer App</h3>
-              <p>
+              <p class="project-summary">
                 Developed an Incredibox-style mobile app with synchronized loop playback, layered audio mixing, and
                 real-time interaction controls.
               </p>
@@ -428,42 +448,47 @@
                 <li>Prioritized timing accuracy and seamless loop transitions.</li>
                 <li>Designed for responsive interaction and smooth music creation.</li>
               </ul>
+              <div class="project-system-panel">
+                <div><span>Stack</span><p>Kotlin, Android Studio, mobile audio APIs</p></div>
+                <div><span>Role</span><p>Solo mobile developer</p></div>
+                <div><span>Architecture</span><p>Loop playback engine, layered mixer controls, touch-first interaction model.</p></div>
+                <div><span>Hardest problem</span><p>Maintaining synchronized playback while users layered sounds in real time.</p></div>
+                <div><span>Outcome</span><p>Built a mobile prototype focused on smooth loop timing and responsive music creation.</p></div>
+              </div>
             </article>
 
-            <article class="project-card" data-reveal>
+            <article class="project-card" data-project-category="games" data-reveal>
               <div class="project-topline">
                 <p class="project-kicker">Gameplay systems</p>
                 <span class="project-stack">Go | Ebitengine</span>
               </div>
               <h3>2D Tower Defense Game</h3>
-              <p>
+              <p class="project-summary">
                 Created a 2D prototype with rendering, input handling, asset loading, and modular gameplay systems.
               </p>
               <ul class="project-points">
                 <li>Implemented core mechanics for player and enemy behavior.</li>
                 <li>Structured the project for future expansion into full tower defense features.</li>
               </ul>
-                <div class="project-actions">
-                  <a class="inline-link" href="#tower-defense-demo">Play demo on this page</a>
-                  <button class="inline-link inline-button" type="button" data-demo-expand>Open expanded demo</button>
-                  <a
-                    class="inline-link"
-                    href="FinalGameDemo/index.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Open standalone demo
-                </a>
+              <div class="project-system-panel">
+                <div><span>Stack</span><p>Go, Ebitengine, WebAssembly demo pipeline</p></div>
+                <div><span>Role</span><p>Solo gameplay programmer</p></div>
+                <div><span>Architecture</span><p>Scene-based flow, rendering/input systems, modular game entities, browser export.</p></div>
+                <div><span>Hardest problem</span><p>Building the prototype as an extensible system instead of a one-off gameplay script.</p></div>
+                <div><span>Outcome</span><p>Delivered a playable browser demo with room to grow into a fuller tower defense build.</p></div>
+              </div>
+              <div class="project-actions">
+                <a class="inline-link" href="#tower-defense-demo">Play demo on this page</a>
               </div>
             </article>
 
-            <article class="project-card" data-reveal>
+            <article class="project-card" data-project-category="backend" data-reveal>
               <div class="project-topline">
                 <p class="project-kicker">API integration</p>
                 <span class="project-stack">Python | REST APIs</span>
               </div>
               <h3>Room Booking API Client</h3>
-              <p>
+              <p class="project-summary">
                 Implemented authentication, room retrieval, and reservation flows against a room-reservation server
                 API.
               </p>
@@ -471,15 +496,22 @@
                 <li>Covered success and failure scenarios with tests.</li>
                 <li>Focused on accurate response handling and robust request flows.</li>
               </ul>
+              <div class="project-system-panel">
+                <div><span>Stack</span><p>Python, REST APIs, test coverage</p></div>
+                <div><span>Role</span><p>Solo API developer</p></div>
+                <div><span>Architecture</span><p>Authentication flow, room retrieval, reservation requests, error-path validation.</p></div>
+                <div><span>Hardest problem</span><p>Making success and failure handling consistent across multiple API interactions.</p></div>
+                <div><span>Outcome</span><p>Produced a tested client that handled booking flows and edge cases cleanly.</p></div>
+              </div>
             </article>
 
-            <article class="project-card" data-reveal>
+            <article class="project-card" data-project-category="web" data-reveal>
               <div class="project-topline">
                 <p class="project-kicker">Personal brand</p>
                 <span class="project-stack">HTML | CSS | JavaScript</span>
               </div>
               <h3>Personal Artist Website</h3>
-              <p>
+              <p class="project-summary">
                 Designed and maintained a responsive website for music releases, live performances, branding, and
                 digital promotion.
               </p>
@@ -487,6 +519,13 @@
                 <li>Balanced design, storytelling, and technical implementation.</li>
                 <li>Used the site as a platform for brand identity and audience communication.</li>
               </ul>
+              <div class="project-system-panel">
+                <div><span>Stack</span><p>HTML, CSS, JavaScript</p></div>
+                <div><span>Role</span><p>Designer and frontend developer</p></div>
+                <div><span>Architecture</span><p>Responsive landing structure, music-release content blocks, promo-focused navigation.</p></div>
+                <div><span>Hardest problem</span><p>Balancing branding, storytelling, and clear calls to action without cluttering the site.</p></div>
+                <div><span>Outcome</span><p>Shipped a live artist site that supports releases, performances, and audience-facing branding.</p></div>
+              </div>
               <div class="project-actions">
                 <a
                   class="inline-link"
@@ -496,6 +535,48 @@
                 >
                   Visit ryanmckenziemusic.com
                 </a>
+              </div>
+            </article>
+
+            <article class="project-card" data-project-category="backend" data-reveal>
+              <div class="project-topline">
+                <p class="project-kicker">Team development</p>
+                <span class="project-stack">Python | SQL | TMDB API</span>
+              </div>
+              <h3>Movie Recommendation Web Application</h3>
+              <p class="project-summary">
+                Built backend features in a Scrum team using API data and SQL-backed user preferences to support movie
+                recommendations.
+              </p>
+              <ul class="project-points">
+                <li>Worked within a collaborative software engineering workflow.</li>
+                <li>Connected API inputs with persistence and recommendation features.</li>
+              </ul>
+              <div class="project-system-panel">
+                <div><span>Stack</span><p>Python, SQL, TMDB API</p></div>
+                <div><span>Role</span><p>Backend contributor on a Scrum team</p></div>
+                <div><span>Architecture</span><p>External API ingestion, SQL-backed preferences, team-built recommendation features.</p></div>
+                <div><span>Hardest problem</span><p>Connecting third-party movie data with stored user preferences inside a collaborative workflow.</p></div>
+                <div><span>Outcome</span><p>Delivered backend recommendation features as part of a team software engineering project.</p></div>
+              </div>
+            </article>
+
+            <article class="project-card project-card-preview" data-project-category="web" data-reveal>
+              <div class="project-topline">
+                <p class="project-kicker">Live preview</p>
+                <span class="project-stack">Web experience</span>
+              </div>
+              <h3>RyanMcKenzieMusic.com Preview</h3>
+              <p class="project-summary">
+                A live hover preview of the artist website, surfaced as its own panel so the web work reads as a
+                stronger visual project inside both the full view and the web filter.
+              </p>
+              <div class="project-system-panel">
+                <div><span>Stack</span><p>HTML, CSS, JavaScript</p></div>
+                <div><span>Role</span><p>Frontend designer and builder</p></div>
+                <div><span>Architecture</span><p>Responsive promo site with release content, performance info, and branded layout blocks.</p></div>
+                <div><span>Hardest problem</span><p>Turning an artist brand into a site that still feels clear and usable under live content changes.</p></div>
+                <div><span>Outcome</span><p>Created a public-facing music website that supports brand identity and audience engagement.</p></div>
               </div>
               <div class="site-preview-card">
                 <div class="site-preview-header">
@@ -516,158 +597,143 @@
                   ></iframe>
                 </div>
                 <p class="site-preview-note">
-                  Hover or focus this card for a live preview. If your browser blocks the external frame, use the link
-                  above.
+                  Hover or focus this card for a live preview. If your browser blocks the external frame, use the main
+                  project link.
                 </p>
               </div>
-            </article>
-
-            <article class="project-card" data-reveal>
-              <div class="project-topline">
-                <p class="project-kicker">Team development</p>
-                <span class="project-stack">Python | SQL | TMDB API</span>
-              </div>
-              <h3>Movie Recommendation Web Application</h3>
-              <p>
-                Built backend features in a Scrum team using API data and SQL-backed user preferences to support movie
-                recommendations.
-              </p>
-              <ul class="project-points">
-                <li>Worked within a collaborative software engineering workflow.</li>
-                <li>Connected API inputs with persistence and recommendation features.</li>
-              </ul>
             </article>
           </div>
 
             <section class="demo-section" id="tower-defense-demo" data-reveal>
               <div class="demo-copy">
-                <p class="eyebrow">Playable Demo</p>
-                <h3>Play the tower defense prototype directly in the portfolio.</h3>
+                <p class="eyebrow">2D Game Design Demos</p>
+                <h3>Move through my game work inside a single 3D carousel stage.</h3>
                 <p>
-                  This browser build is compiled from the Go codebase with WebAssembly, so visitors can interact with a
-                  real version of the project instead of just reading a summary.
+                  The carousel window is the whole visual stage, and each demo only loads into the active slide so the
+                  interaction stays focused and fast.
                 </p>
-                <div class="demo-actions">
-                  <button class="btn btn-primary" type="button" data-demo-expand>Launch expanded view</button>
-                  <a class="btn btn-secondary" href="FinalGameDemo/index.html" target="_blank" rel="noopener noreferrer">
-                    Open in new tab
-                  </a>
-                </div>
               </div>
-              <div class="demo-frame-shell" data-demo-runtime="tower-defense">
-                <div class="demo-runtime-placeholder">
-                  <p class="eyebrow">Performance Mode</p>
-                  <h4>Load the tower defense demo only when you want to play it.</h4>
-                  <p>Only one live demo runs at a time on the page, so the active game gets the full browser budget.</p>
-                  <div class="demo-runtime-actions">
-                    <button class="btn btn-primary" type="button" data-demo-launch>Play in portfolio</button>
+              <div class="demo-carousel" data-demo-carousel>
+                <button class="demo-carousel-arrow demo-carousel-arrow-left" type="button" aria-label="Previous demo" data-demo-prev>
+                  &#10094;
+                </button>
+                <div class="demo-carousel-viewport">
+                  <div class="demo-carousel-track" aria-live="polite">
+                    <article class="demo-slide is-active" data-demo-slide>
+                      <div class="demo-window-frame">
+                        <div class="demo-window-inner demo-window-inner-final">
+                          <div class="mini-demo-shell" data-demo-runtime="tower-defense">
+                            <div class="mini-demo-placeholder">
+                              <p>Boot the tower defense build in the active stage. Other demos stand down automatically.</p>
+                              <button class="btn btn-primary" type="button" data-demo-launch>Launch Demo</button>
+                            </div>
+                            <iframe
+                              class="mini-demo-frame"
+                              data-demo-src="FinalGameDemo/index.html?embed=1"
+                              title="Playable tower defense demo"
+                              loading="lazy"
+                              allow="autoplay"
+                            ></iframe>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+
+                    <article class="demo-slide" data-demo-slide>
+                      <div class="demo-window-frame">
+                        <div class="demo-window-inner demo-window-inner-arcade">
+                          <div class="mini-demo-shell" data-demo-runtime="asteroid-dodge">
+                            <div class="mini-demo-placeholder">
+                              <p>Spin up the asteroid run in the active stage. Other demos stand down automatically.</p>
+                              <button class="btn btn-primary" type="button" data-demo-launch>Launch Demo</button>
+                            </div>
+                            <iframe
+                              class="mini-demo-frame"
+                              data-demo-src="programProject1Demo/index.html?embed=1"
+                              title="Playable asteroid dodge demo"
+                              loading="lazy"
+                              allow="autoplay"
+                            ></iframe>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+
+                    <article class="demo-slide" data-demo-slide>
+                      <div class="demo-window-frame">
+                        <div class="demo-window-inner demo-window-inner-square">
+                          <div class="mini-demo-shell" data-demo-runtime="tuna-cat">
+                            <div class="mini-demo-placeholder">
+                              <p>Drop into Tuna Cat in the active stage. Other demos stand down automatically.</p>
+                              <button class="btn btn-primary" type="button" data-demo-launch>Launch Demo</button>
+                            </div>
+                            <iframe
+                              class="mini-demo-frame"
+                              data-demo-src="programProject2Demo/index.html?embed=1"
+                              title="Playable tuna cat demo"
+                              loading="lazy"
+                              allow="autoplay"
+                            ></iframe>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
                   </div>
                 </div>
-                <iframe
-                  class="demo-frame"
-                  data-demo-src="FinalGameDemo/index.html?embed=1"
-                  title="Playable FinalGame tower defense demo"
-                  loading="lazy"
-                  allow="autoplay"
-                ></iframe>
-              </div>
-              <details class="more-demos" data-extra-demos>
-                <summary>See more demos I made in 2D Game Design</summary>
-                <div class="more-demos-grid">
-                  <article class="mini-demo-card">
-                    <div class="mini-demo-copy">
-                      <p class="eyebrow">Program Project 1</p>
-                      <h4>Asteroid Dodge</h4>
-                      <p>
-                        Pilot a spaceship, dodge incoming asteroids, and clear paths with timed shots in this arcade
-                        prototype.
-                      </p>
-                      <div class="mini-demo-actions">
-                        <a
-                          class="btn btn-secondary"
-                          href="programProject1Demo/index.html"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Open in new tab
-                        </a>
-                      </div>
-                    </div>
-                    <div class="mini-demo-shell mini-demo-shell-wide" data-demo-runtime="asteroid-dodge">
-                      <div class="mini-demo-placeholder">
-                        <p>Load this demo when you want to play it. Other embedded demos will pause.</p>
-                        <button class="btn btn-primary" type="button" data-demo-launch>Play this demo</button>
-                      </div>
-                      <iframe
-                        class="mini-demo-frame"
-                        data-demo-src="programProject1Demo/index.html?embed=1"
-                        title="Playable asteroid dodge demo"
-                        loading="lazy"
-                        allow="autoplay"
-                      ></iframe>
-                    </div>
-                  </article>
-
-                  <article class="mini-demo-card">
-                    <div class="mini-demo-copy">
-                      <p class="eyebrow">Program Project 2</p>
-                      <h4>Tuna Cat</h4>
-                      <p>
-                        Explore the map as a cat, collect the right cans, avoid the bad pickups, and unlock the portal
-                        to the second stage.
-                      </p>
-                      <div class="mini-demo-actions">
-                        <a
-                          class="btn btn-secondary"
-                          href="programProject2Demo/index.html"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Open in new tab
-                        </a>
-                      </div>
-                    </div>
-                    <div class="mini-demo-shell mini-demo-shell-square" data-demo-runtime="tuna-cat">
-                      <div class="mini-demo-placeholder">
-                        <p>Load this demo when you want to play it. Other embedded demos will pause.</p>
-                        <button class="btn btn-primary" type="button" data-demo-launch>Play this demo</button>
-                      </div>
-                      <iframe
-                        class="mini-demo-frame"
-                        data-demo-src="programProject2Demo/index.html?embed=1"
-                        title="Playable tuna cat demo"
-                        loading="lazy"
-                        allow="autoplay"
-                      ></iframe>
-                    </div>
-                  </article>
+                <button class="demo-carousel-arrow demo-carousel-arrow-right" type="button" aria-label="Next demo" data-demo-next>
+                  &#10095;
+                </button>
+                <div class="demo-carousel-status">
+                  <p class="eyebrow">Carousel</p>
+                  <p><span data-demo-current>01</span> / <span data-demo-total>03</span></p>
                 </div>
-              </details>
-              </section>
+              </div>
+              <div class="demo-detail-panels">
+                <article class="demo-detail-panel is-active" data-demo-detail>
+                  <p class="eyebrow">Slide 01</p>
+                  <h4>FinalGame: Tower Defense</h4>
+                  <p>
+                    The most complete project in the set, now embedded into the same carousel window as the other
+                    demos so the presentation feels consistent across the whole showcase.
+                  </p>
+                  <ul class="demo-feature-list">
+                    <li>Rendered inside the same shared carousel frame as the other games.</li>
+                    <li>Mouse-driven tower placement and setup interaction.</li>
+                    <li>Only the active demo stays mounted for smoother performance.</li>
+                  </ul>
+                </article>
+
+                <article class="demo-detail-panel" data-demo-detail>
+                  <p class="eyebrow">Slide 02</p>
+                  <h4>Program Project 1: Asteroid Dodge</h4>
+                  <p>
+                    A tighter arcade-style prototype with ship movement, shooting, score tracking, and constant pressure
+                    from falling asteroids.
+                  </p>
+                  <ul class="demo-feature-list">
+                    <li>Embedded directly into the active carousel stage.</li>
+                    <li>Optimized to run at a fixed internal resolution in the browser.</li>
+                    <li>Only the active demo stays mounted for smoother performance.</li>
+                  </ul>
+                </article>
+
+                <article class="demo-detail-panel" data-demo-detail>
+                  <p class="eyebrow">Slide 03</p>
+                  <h4>Program Project 2: Tuna Cat</h4>
+                  <p>
+                    A playful map-based prototype where the player collects the right items, avoids failure states, and
+                    unlocks progression into a second area.
+                  </p>
+                  <ul class="demo-feature-list">
+                    <li>Square stage to match the game’s native composition.</li>
+                    <li>Portal progression and item collection structure.</li>
+                    <li>Rendered in the same wheel carousel system as the other demos.</li>
+                  </ul>
+                </article>
+              </div>
+            </section>
             </div>
           </section>
-
-        <div class="demo-modal" id="demo-modal" aria-hidden="true">
-          <div class="demo-modal-backdrop" data-demo-close></div>
-          <div class="demo-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title">
-            <div class="demo-modal-topbar">
-              <div>
-                <p class="eyebrow">Expanded Demo</p>
-                <h3 id="demo-modal-title">FinalGame: Tower Defense</h3>
-              </div>
-              <button class="demo-modal-close" type="button" aria-label="Close expanded demo" data-demo-close>
-                Close
-              </button>
-            </div>
-            <iframe
-              class="demo-modal-frame"
-              data-demo-src="FinalGameDemo/index.html?embed=1"
-              title="Expanded playable FinalGame tower defense demo"
-              loading="lazy"
-              allow="autoplay"
-            ></iframe>
-          </div>
-        </div>
 
         <section id="experience" class="section section-tinted">
           <div class="container section-shell">
@@ -768,29 +834,29 @@
                 </article>
 
                 <article class="media-card">
+                  <div class="media-card-player">
+                    <video controls preload="metadata" playsinline>
+                      <source src="Media/200yrdMedleyRelayRecord.mov" type="video/quicktime" />
+                      Your browser could not play this video inline. Use the link above to open it directly.
+                    </video>
+                  </div>
                   <div class="media-card-copy">
                     <p class="card-label">Featured clip</p>
                     <h4>200-yard medley relay school record</h4>
-                  <p>
-                    Bridgewater State relay performance with the record-setting team and your backstroke leg in the
-                    race.
-                  </p>
-                  <a
-                    class="inline-link"
-                    href="Media/200yrdMedleyRelayRecord.mov"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Open video in a new tab
-                  </a>
-                </div>
-                <div class="media-card-player">
-                  <video controls preload="metadata" playsinline>
-                    <source src="Media/200yrdMedleyRelayRecord.mov" type="video/quicktime" />
-                    Your browser could not play this video inline. Use the link above to open it directly.
-                  </video>
-                </div>
-              </article>
+                    <p>
+                      Bridgewater State relay performance with the record-setting team and your backstroke leg in the
+                      race.
+                    </p>
+                    <a
+                      class="inline-link"
+                      href="Media/200yrdMedleyRelayRecord.mov"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Open video in a new tab
+                    </a>
+                  </div>
+                </article>
 
                 <div class="media-gallery-grid">
                   <article class="media-gallery-card">

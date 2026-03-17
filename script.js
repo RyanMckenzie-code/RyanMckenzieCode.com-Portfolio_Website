@@ -4,16 +4,17 @@ const navLinks = document.querySelectorAll('.site-nav a');
 const sections = document.querySelectorAll('main section[id]');
 const revealItems = document.querySelectorAll('[data-reveal]');
 const yearElement = document.getElementById('year');
-const demoModal = document.getElementById('demo-modal');
-const demoModalFrame = demoModal ? demoModal.querySelector('.demo-modal-frame') : null;
-const demoExpandTriggers = document.querySelectorAll('[data-demo-expand]');
-const demoCloseTriggers = document.querySelectorAll('[data-demo-close]');
+const projectsGrid = document.querySelector('.projects-grid');
+const projectCards = document.querySelectorAll('.project-card[data-project-category]');
+const projectFilters = document.querySelectorAll('[data-project-filter]');
+const systemsToggle = document.querySelector('[data-systems-toggle]');
+const demoSection = document.getElementById('tower-defense-demo');
 const mediaToggles = document.querySelectorAll('[data-media-toggle]');
 const mediaSection = document.getElementById('swim-media');
 const pixelCloud = document.querySelector('.pixel-cloud');
 const sitePreviewCards = document.querySelectorAll('.site-preview-card');
+const demoCarousel = document.querySelector('[data-demo-carousel]');
 const demoRuntimes = document.querySelectorAll('[data-demo-runtime]');
-const extraDemoGroups = document.querySelectorAll('[data-extra-demos]');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 window.addEventListener('load', () => {
@@ -22,6 +23,12 @@ window.addEventListener('load', () => {
 
 if (yearElement) {
   yearElement.textContent = new Date().getFullYear();
+}
+
+if (revealItems.length > 0) {
+  revealItems.forEach((item, index) => {
+    item.style.setProperty('--reveal-delay', `${(index % 6) * 70}ms`);
+  });
 }
 
 if (pixelCloud) {
@@ -76,6 +83,55 @@ if (sitePreviewCards.length > 0) {
   });
 }
 
+if (projectFilters.length > 0 && projectCards.length > 0) {
+  const applyProjectFilter = (category) => {
+    projectFilters.forEach((filterButton) => {
+      filterButton.classList.toggle('is-active', filterButton.dataset.projectFilter === category);
+    });
+
+    projectCards.forEach((card) => {
+      const matches = category === 'all' || card.dataset.projectCategory === category;
+      card.classList.toggle('is-hidden', !matches);
+    });
+
+    if (demoSection) {
+      const showDemos = category === 'all' || category === 'games';
+      demoSection.classList.toggle('is-hidden', !showDemos);
+
+      if (!showDemos) {
+        demoRuntimes.forEach((shell) => {
+          const frame = shell.querySelector('iframe[data-demo-src]');
+
+          if (frame && frame.src) {
+            frame.src = 'about:blank';
+          }
+
+          shell.classList.remove('is-active', 'is-loaded');
+        });
+
+        demoCarousel?.classList.remove('is-demo-running');
+      }
+    }
+  };
+
+  projectFilters.forEach((filterButton) => {
+    filterButton.addEventListener('click', () => {
+      applyProjectFilter(filterButton.dataset.projectFilter || 'all');
+    });
+  });
+
+  applyProjectFilter('all');
+}
+
+if (systemsToggle && projectsGrid) {
+  systemsToggle.addEventListener('click', () => {
+    const nextPressed = systemsToggle.getAttribute('aria-pressed') !== 'true';
+    systemsToggle.setAttribute('aria-pressed', String(nextPressed));
+    systemsToggle.classList.toggle('is-active', nextPressed);
+    projectsGrid.classList.toggle('is-systems-view', nextPressed);
+  });
+}
+
 const unloadDemoFrame = (frame, shell = null) => {
   if (!frame) {
     return;
@@ -90,6 +146,15 @@ const unloadDemoFrame = (frame, shell = null) => {
   }
 };
 
+const syncCarouselRuntimeState = () => {
+  if (!demoCarousel) {
+    return;
+  }
+
+  const hasRunningDemo = Array.from(demoRuntimes).some((shell) => shell.classList.contains('is-loaded'));
+  demoCarousel.classList.toggle('is-demo-running', hasRunningDemo);
+};
+
 const unloadEmbeddedDemos = (activeShell = null) => {
   demoRuntimes.forEach((shell) => {
     if (shell === activeShell) {
@@ -98,6 +163,8 @@ const unloadEmbeddedDemos = (activeShell = null) => {
 
     unloadDemoFrame(shell.querySelector('iframe[data-demo-src]'), shell);
   });
+
+  syncCarouselRuntimeState();
 };
 
 const loadEmbeddedDemo = (shell) => {
@@ -108,19 +175,151 @@ const loadEmbeddedDemo = (shell) => {
   }
 
   unloadEmbeddedDemos(shell);
-  unloadDemoFrame(demoModalFrame);
 
   if (frame.src !== frame.dataset.demoSrc) {
     frame.addEventListener('load', () => {
       shell.classList.add('is-loaded');
+      syncCarouselRuntimeState();
     }, { once: true });
     frame.src = frame.dataset.demoSrc;
   } else {
     shell.classList.add('is-loaded');
+    syncCarouselRuntimeState();
   }
 
   shell.classList.add('is-active');
 };
+
+const getCircularOffset = (index, activeIndex, total) => {
+  let delta = index - activeIndex;
+
+  if (delta > total / 2) {
+    delta -= total;
+  }
+
+  if (delta < -total / 2) {
+    delta += total;
+  }
+
+  return delta;
+};
+
+const initCarousel = ({
+  root,
+  slideSelector,
+  prevSelector,
+  nextSelector,
+  currentSelector,
+  totalSelector,
+  captionSelector = null,
+  updateSlide,
+  onAfterUpdate = null,
+}) => {
+  if (!root) {
+    return null;
+  }
+
+  const slides = Array.from(root.querySelectorAll(slideSelector));
+  const prevButton = root.querySelector(prevSelector);
+  const nextButton = root.querySelector(nextSelector);
+  const currentLabel = root.querySelector(currentSelector);
+  const totalLabel = root.querySelector(totalSelector);
+  const captionLabel = captionSelector ? root.querySelector(captionSelector) : null;
+  let activeIndex = 0;
+
+  const update = () => {
+    slides.forEach((slide, index) => {
+      const offset = getCircularOffset(index, activeIndex, slides.length);
+      updateSlide(slide, index, offset, activeIndex);
+    });
+
+    if (currentLabel) {
+      currentLabel.textContent = String(activeIndex + 1).padStart(2, '0');
+    }
+
+    if (totalLabel) {
+      totalLabel.textContent = String(slides.length).padStart(2, '0');
+    }
+
+    if (captionLabel) {
+      captionLabel.textContent = slides[activeIndex]?.dataset.carouselCaption || '';
+    }
+
+    onAfterUpdate?.(slides, activeIndex);
+  };
+
+  prevButton?.addEventListener('click', () => {
+    activeIndex = (activeIndex - 1 + slides.length) % slides.length;
+    update();
+  });
+
+  nextButton?.addEventListener('click', () => {
+    activeIndex = (activeIndex + 1) % slides.length;
+    update();
+  });
+
+  update();
+
+  return {
+    update,
+    getActiveIndex: () => activeIndex,
+  };
+};
+
+if (demoCarousel) {
+  const demoSlides = Array.from(demoCarousel.querySelectorAll('[data-demo-slide]'));
+  const demoDetails = Array.from(document.querySelectorAll('[data-demo-detail]'));
+
+  const unloadInactiveSlides = () => {
+    demoSlides.forEach((slide, index) => {
+      const isActive = slide.classList.contains('is-active');
+
+      if (isActive) {
+        return;
+      }
+
+      slide.querySelectorAll('[data-demo-runtime]').forEach((shell) => {
+        unloadDemoFrame(shell.querySelector('iframe[data-demo-src]'), shell);
+      });
+    });
+  };
+
+  initCarousel({
+    root: demoCarousel,
+    slideSelector: '[data-demo-slide]',
+    prevSelector: '[data-demo-prev]',
+    nextSelector: '[data-demo-next]',
+    currentSelector: '[data-demo-current]',
+    totalSelector: '[data-demo-total]',
+    updateSlide: (slide, index, offset, activeIndex) => {
+      const absOffset = Math.abs(offset);
+
+      slide.classList.toggle('is-active', index === activeIndex);
+      slide.setAttribute('aria-hidden', String(index !== activeIndex));
+
+      if (Math.abs(offset) < 0.01) {
+        slide.style.transform = 'translateX(-50%) translateZ(0) rotateY(0deg) scale(1)';
+        slide.style.zIndex = '3';
+      } else if (offset < 0) {
+        slide.style.transform =
+          `translateX(calc(-50% - ${12 + absOffset * 4}rem)) translateZ(-${absOffset * 140}px) rotateY(28deg) scale(${Math.max(0.82, 1 - absOffset * 0.06)})`;
+        slide.style.zIndex = String(3 - absOffset);
+      } else {
+        slide.style.transform =
+          `translateX(calc(-50% + ${12 + absOffset * 4}rem)) translateZ(-${absOffset * 140}px) rotateY(-28deg) scale(${Math.max(0.82, 1 - absOffset * 0.06)})`;
+        slide.style.zIndex = String(3 - absOffset);
+      }
+    },
+    onAfterUpdate: (_slides, activeIndex) => {
+      demoDetails.forEach((detail, index) => {
+        detail.classList.toggle('is-active', index === activeIndex);
+      });
+
+      unloadInactiveSlides();
+      syncCarouselRuntimeState();
+    },
+  });
+}
 
 if (demoRuntimes.length > 0) {
   demoRuntimes.forEach((shell) => {
@@ -129,20 +328,6 @@ if (demoRuntimes.length > 0) {
     launchTriggers.forEach((trigger) => {
       trigger.addEventListener('click', () => {
         loadEmbeddedDemo(shell);
-      });
-    });
-  });
-}
-
-if (extraDemoGroups.length > 0) {
-  extraDemoGroups.forEach((group) => {
-    group.addEventListener('toggle', () => {
-      if (group.open) {
-        return;
-      }
-
-      group.querySelectorAll('[data-demo-runtime]').forEach((shell) => {
-        unloadDemoFrame(shell.querySelector('iframe[data-demo-src]'), shell);
       });
     });
   });
@@ -163,41 +348,6 @@ if (menuButton && nav) {
   });
 }
 
-if (demoModal) {
-  const openDemoModal = () => {
-    unloadEmbeddedDemos();
-
-    if (demoModalFrame && demoModalFrame.dataset.demoSrc && demoModalFrame.src !== demoModalFrame.dataset.demoSrc) {
-      demoModalFrame.src = demoModalFrame.dataset.demoSrc;
-    }
-
-    demoModal.classList.add('is-open');
-    demoModal.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('modal-open');
-  };
-
-  const closeDemoModal = () => {
-    unloadDemoFrame(demoModalFrame);
-    demoModal.classList.remove('is-open');
-    demoModal.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('modal-open');
-  };
-
-  demoExpandTriggers.forEach((trigger) => {
-    trigger.addEventListener('click', openDemoModal);
-  });
-
-  demoCloseTriggers.forEach((trigger) => {
-    trigger.addEventListener('click', closeDemoModal);
-  });
-
-  window.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && demoModal.classList.contains('is-open')) {
-      closeDemoModal();
-    }
-  });
-}
-
 if (mediaToggles.length > 0 && mediaSection) {
   const updateMediaToggles = (isExpanded) => {
     mediaToggles.forEach((toggle) => {
@@ -215,6 +365,12 @@ if (mediaToggles.length > 0 && mediaSection) {
 
       mediaSection.hidden = !nextExpanded;
       updateMediaToggles(nextExpanded);
+
+      if (!nextExpanded) {
+        mediaSection.querySelectorAll('video').forEach((video) => {
+          video.pause();
+        });
+      }
 
       if (nextExpanded) {
         mediaSection.classList.add('is-visible');
@@ -256,6 +412,11 @@ if ('IntersectionObserver' in window && sections.length > 0) {
         }
 
         const activeId = entry.target.getAttribute('id');
+        document.body.dataset.activeSection = activeId || '';
+
+        sections.forEach((section) => {
+          section.classList.toggle('is-current', section === entry.target);
+        });
 
         navLinks.forEach((link) => {
           const isActive = link.getAttribute('href') === `#${activeId}`;
