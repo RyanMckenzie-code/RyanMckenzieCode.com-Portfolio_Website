@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../GolandProjects/FinalGame"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "RyanMckenzieCode.com-Portfolio_Website"
+	}
+}
